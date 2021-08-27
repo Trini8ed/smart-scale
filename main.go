@@ -33,11 +33,10 @@ func main() {
 		return
 	}
 
-	var data int
 	for i := 0; i < 10000; i++ {
 		time.Sleep(200 * time.Microsecond)
 
-		data, err = hx711.ReadDataRaw()
+		data, err := hx711.ReadDataRaw()
 		if err != nil {
 			fmt.Println("ReadDataRaw error:", err)
 			continue
