@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 
+	"periph.io/x/conn/v3/driver/driverreg"
 	"periph.io/x/conn/v3/physic"
 	"periph.io/x/conn/v3/spi"
 	"periph.io/x/conn/v3/spi/spireg"
@@ -44,7 +45,9 @@ func main() {
 		}
 	*/
 	// Make sure periph is initialized.
-	if _, err := host.Init(); err != nil {
+	host.Init()
+
+	if _, err := driverreg.Init(); err != nil {
 		log.Fatal(err)
 	}
 
