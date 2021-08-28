@@ -65,6 +65,11 @@ func main() {
 	// turns on the display
 	write := []byte{0x41, 0xFE}
 	read := make([]byte, len(write))
+	if err != nil {
+		fmt.Println("cannot open LCD device", err)
+		return
+	}
+
 	if err := c.Tx(write, read); err != nil {
 		log.Fatal(err)
 	}
