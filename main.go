@@ -45,7 +45,11 @@ func main() {
 		}
 	*/
 	// Make sure periph is initialized.
-	host.Init()
+
+	if _, err := host.Init(); err != nil {
+		fmt.Println("host.Init error:", err)
+		return
+	}
 
 	if _, err := driverreg.Init(); err != nil {
 		log.Fatal(err)
