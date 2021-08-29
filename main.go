@@ -1,11 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"log"
 
+	"periph.io/x/conn/v3/driver/driverreg"
 	"periph.io/x/conn/v3/spi/spireg"
-	"periph.io/x/periph/host"
 )
 
 func main() {
@@ -42,18 +41,18 @@ func main() {
 		}
 	*/
 	// Make sure periph is initialized.
-
-	if _, err := host.Init(); err != nil {
-		fmt.Println("host.Init error:", err)
-		return
-	}
 	/*
-		if _, err := driverreg.Init(); err != nil {
-			log.Fatal("DriverReg: ", err)
+		if _, err := host.Init(); err != nil {
+			fmt.Println("host.Init error:", err)
+			return
 		}
 	*/
+	if _, err := driverreg.Init(); err != nil {
+		log.Fatal("DriverReg: ", err)
+	}
+
 	// Use spireg SPI port registry to find the first available SPI bus.
-	p, err := spireg.Open("/dev/spidev0.0")
+	p, err := spireg.Open("/dev/spi0")
 	if err != nil {
 		log.Fatal("Open: ", err)
 	}
