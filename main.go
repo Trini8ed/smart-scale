@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"log"
 
-	"periph.io/x/conn/v3/physic"
-	"periph.io/x/conn/v3/spi"
 	"periph.io/x/conn/v3/spi/spireg"
 	"periph.io/x/periph/host"
 )
@@ -60,26 +58,29 @@ func main() {
 		log.Fatal("Open: ", err)
 	}
 	defer p.Close()
+	/*
+		// Convert the spi.Port into a spi.Conn so it can be used for communication.
+		c, err := p.Connect(physic.KiloHertz, spi.Mode3, 8)
+		if err != nil {
+			log.Fatal("Connect: ", err)
+		}
 
-	// Convert the spi.Port into a spi.Conn so it can be used for communication.
-	c, err := p.Connect(physic.KiloHertz, spi.Mode3, 8)
-	if err != nil {
-		log.Fatal("Connect: ", err)
-	}
+		// Write 0x10 to the device, and read a byte right after.
 
-	// Write 0x10 to the device, and read a byte right after.
+		// turns on the display
+		displayOn := []byte{0x41, 0xFE}
+		read := make([]byte, len(displayOn))
+		if err != nil {
+			fmt.Println("cannot open LCD device", err)
+			return
+		}
 
-	// turns on the display
-	displayOn := []byte{0x41, 0xFE}
-	read := make([]byte, len(displayOn))
-	if err != nil {
-		fmt.Println("cannot open LCD device", err)
-		return
-	}
+		if err := c.Tx(displayOn, read); err != nil {
+			log.Fatal(err)
+		}
 
-	if err := c.Tx(displayOn, read); err != nil {
-		log.Fatal(err)
-	}
-	// Use read.
-	fmt.Printf("%v\n", read[1:])
+		// Use read.
+		fmt.Printf("%v\n", read[1:])
+	*/
+
 }
