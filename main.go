@@ -52,20 +52,20 @@ func main() {
 	}
 
 	if _, err := driverreg.Init(); err != nil {
-		log.Fatal(err)
+		log.Fatal("DriverReg: ", err)
 	}
 
 	// Use spireg SPI port registry to find the first available SPI bus.
-	p, err := spireg.Open("")
+	p, err := spireg.Open("0")
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Open: ", err)
 	}
 	defer p.Close()
 
 	// Convert the spi.Port into a spi.Conn so it can be used for communication.
-	c, err := p.Connect(physic.MegaHertz, spi.Mode3, 8)
+	c, err := p.Connect(physic.KiloHertz, spi.Mode3, 8)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Connect: ", err)
 	}
 
 	// Write 0x10 to the device, and read a byte right after.
