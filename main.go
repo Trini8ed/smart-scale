@@ -6,7 +6,6 @@ import (
 
 	"periph.io/x/conn/v3/spi/spireg"
 	"periph.io/x/host/v3"
-	"periph.io/x/periph/host"
 )
 
 func main() {
@@ -48,40 +47,33 @@ func main() {
 		fmt.Println("host.Init error:", err)
 		return
 	}
-	/*
-		if _, err := driverreg.Init(); err != nil {
-			log.Fatal("DriverReg: ", err)
-		}
-	*/
+
 	// Use spireg SPI port registry to find the first available SPI bus.
-	p, err := spireg.Open("/dev/spi0")
+	p, err := spireg.Open("")
 	if err != nil {
 		log.Fatal("Open: ", err)
 	}
 	defer p.Close()
-	/*
-		// Convert the spi.Port into a spi.Conn so it can be used for communication.
-		c, err := p.Connect(physic.KiloHertz, spi.Mode3, 8)
-		if err != nil {
-			log.Fatal("Connect: ", err)
-		}
 
-		// Write 0x10 to the device, and read a byte right after.
+	// Convert the spi.Port into a spi.Conn so it can be used for communication.
+	// c, err := p.Connect(physic.KiloHertz, spi.Mode3, 8)
+	// if err != nil {
+	// 	log.Fatal("Connect: ", err)
+	// }
 
-		// turns on the display
-		displayOn := []byte{0x41, 0xFE}
-		read := make([]byte, len(displayOn))
-		if err != nil {
-			fmt.Println("cannot open LCD device", err)
-			return
-		}
+	// Write 0x10 to the device, and read a byte right after.
 
-		if err := c.Tx(displayOn, read); err != nil {
-			log.Fatal(err)
-		}
+	// turns on the display
+	// displayOn := []byte{0x41, 0xFE}
+	// read := make([]byte, len(displayOn))
+	// if err != nil {
+	// 	fmt.Println("cannot open LCD device", err)
+	// 	return
+	// }
 
-		// Use read.
-		fmt.Printf("%v\n", read[1:])
-	*/
-
+	// if err := c.Tx(displayOn, read); err != nil {
+	// 	log.Fatal(err)
+	// }
+	// // Use read.
+	// fmt.Printf("%v\n", read[1:])
 }
