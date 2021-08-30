@@ -88,7 +88,9 @@ func main() {
 	// Use read.
 	fmt.Printf("%v\n", read[1:])
 
-	writestring := []byte{0x00, data}
+	var a1 byte = data
+
+	writestring := []byte{0x00, a1}
 	read2 := make([]byte, len(displayOn))
 	if err != nil {
 		fmt.Println("cannot display", err)
