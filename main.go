@@ -33,8 +33,6 @@ func main() {
 		fmt.Println("Reset error:", err)
 		return
 	}
-	//create data
-	data, err := hx711.ReadDataRaw()
 
 	for i := 0; i < 5; i++ {
 		time.Sleep(200 * time.Microsecond)
@@ -81,12 +79,12 @@ func main() {
 	if err := c.Tx(displayOn, read); err != nil {
 		log.Fatal(err)
 	}
-
-	if _, err := NewRecordRaw(data); err != nil {
-		fmt.Println("cannot read data", err)
-		return
-	}
-
+	/*
+		if _, err := NewRecordRaw(data); err != nil {
+			fmt.Println("cannot read data", err)
+			return
+		}
+	*/
 	// Use read.
 	fmt.Printf("%v\n", read[1:])
 }
