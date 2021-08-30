@@ -66,16 +66,16 @@ func main() {
 	// Write 0x10 to the device, and read a byte right after.
 
 	// turns on the display
-	// displayOn := []byte{0x41, 0xFE}
-	// read := make([]byte, len(displayOn))
-	// if err != nil {
-	// 	fmt.Println("cannot open LCD device", err)
-	// 	return
-	// }
+	displayOn := []byte{0x41, 0xFE}
+	read := make([]byte, len(displayOn))
+	if err != nil {
+		fmt.Println("cannot open LCD device", err)
+		return
+	}
 
-	// if err := c.Tx(displayOn, read); err != nil {
-	// 	log.Fatal(err)
-	// }
-	// // Use read.
-	// fmt.Printf("%v\n", read[1:])
+	if err := c.Tx(displayOn, read); err != nil {
+		log.Fatal(err)
+	}
+	// Use read.
+	fmt.Printf("%v\n", read[1:])
 }
