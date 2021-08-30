@@ -87,4 +87,9 @@ func main() {
 	*/
 	// Use read.
 	fmt.Printf("%v\n", read[1:])
+
+	if _, err := spireg.Open("SUUUUP NICK"); err != nil {
+		fmt.Println("cannot print data brotha", err)
+		return
+	}
 }
