@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"log"
-	"testing"
 	"time"
 
 	"github.com/MichaelS11/go-hx711"
@@ -34,7 +33,7 @@ func main() {
 		fmt.Println("Reset error:", err)
 		return
 	}
-
+	data, err := hx711.ReadDataRaw()
 	for i := 0; i < 5; i++ {
 		time.Sleep(200 * time.Microsecond)
 
@@ -89,8 +88,14 @@ func main() {
 	// Use read.
 	fmt.Printf("%v\n", read[1:])
 
-	if _, err := TestMode_String(t * testing.T); err != nil {
-		fmt.Println("cannot print data brotha", err)
+	writestring := []byte{0x00, data}
+	read2 := make([]byte, len(displayOn))
+	if err != nil {
+		fmt.Println("cannot display", err)
 		return
+	}
+
+	if err := c.Tx(writestring, read2); err != nil {
+		log.Fatal(err)
 	}
 }
