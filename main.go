@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"log"
 
+	"periph.io/x/conn/v3/physic"
+	"periph.io/x/conn/v3/spi"
 	"periph.io/x/conn/v3/spi/spireg"
 	"periph.io/x/host/v3"
 )
@@ -55,11 +57,11 @@ func main() {
 	}
 	defer p.Close()
 
-	// Convert the spi.Port into a spi.Conn so it can be used for communication.
-	// c, err := p.Connect(physic.KiloHertz, spi.Mode3, 8)
-	// if err != nil {
-	// 	log.Fatal("Connect: ", err)
-	// }
+	// the spi.Port into a spi.Conn so it can be used for communication.
+	_, err = p.Connect(physic.KiloHertz, spi.Mode3, 8)
+	if err != nil {
+		log.Fatal("Connect: ", err)
+	}
 
 	// Write 0x10 to the device, and read a byte right after.
 
