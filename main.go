@@ -3,7 +3,9 @@ package main
 import (
 	"fmt"
 	"log"
+	"time"
 
+	"github.com/MichaelS11/go-hx711"
 	"periph.io/x/conn/v3/physic"
 	"periph.io/x/conn/v3/spi"
 	"periph.io/x/conn/v3/spi/spireg"
@@ -11,39 +13,39 @@ import (
 )
 
 func main() {
-	/*
-		err := hx711.HostInit()
+
+	err := hx711.HostInit()
+	if err != nil {
+		fmt.Println("HostInit error:", err)
+		return
+	}
+
+	hx711, err := hx711.NewHx711("GPIO6", "GPIO5")
+	if err != nil {
+		fmt.Println("NewHx711 error:", err)
+		return
+	}
+
+	defer hx711.Shutdown()
+
+	err = hx711.Reset()
+	if err != nil {
+		fmt.Println("Reset error:", err)
+		return
+	}
+
+	for i := 0; i < 5; i++ {
+		time.Sleep(200 * time.Microsecond)
+
+		data, err := hx711.ReadDataRaw()
 		if err != nil {
-			fmt.Println("HostInit error:", err)
-			return
+			fmt.Println("ReadDataRaw error:", err)
+			continue
 		}
 
-		hx711, err := hx711.NewHx711("GPIO6", "GPIO5")
-		if err != nil {
-			fmt.Println("NewHx711 error:", err)
-			return
-		}
+		fmt.Println(data)
+	}
 
-		defer hx711.Shutdown()
-
-		err = hx711.Reset()
-		if err != nil {
-			fmt.Println("Reset error:", err)
-			return
-		}
-
-		for i := 0; i < 10000; i++ {
-			time.Sleep(200 * time.Microsecond)
-
-			data, err := hx711.ReadDataRaw()
-			if err != nil {
-				fmt.Println("ReadDataRaw error:", err)
-				continue
-			}
-
-			fmt.Println(data)
-		}
-	*/
 	// Make sure periph is initialized.
 
 	if _, err := host.Init(); err != nil {
@@ -77,13 +79,12 @@ func main() {
 	if err := c.Tx(displayOn, read); err != nil {
 		log.Fatal(err)
 	}
+
+	if _, err := NewRecordRaw(data); err != nil {
+		fmt.Println("cannot read data", err)
+		return
+	}
+
 	// Use read.
 	fmt.Printf("%v\n", read[1:])
-
-	if p, ok := c.(spi.Pins); ok {
-		fmt.Printf("  CLK : %s", p.CLK())
-		fmt.Printf("  MOSI: %s", p.MOSI())
-		fmt.Printf("  MISO: %s", p.MISO())
-		fmt.Printf("  CS  : %s", p.CS())
-	}
 }
