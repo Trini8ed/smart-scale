@@ -33,7 +33,7 @@ func main() {
 		fmt.Println("Reset error:", err)
 		return
 	}
-	data, err := hx711.ReadDataRaw()
+
 	for i := 0; i < 5; i++ {
 		time.Sleep(200 * time.Microsecond)
 
