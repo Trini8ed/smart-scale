@@ -78,18 +78,25 @@ func main() {
 		}
 		// Use read.
 		fmt.Printf("%v\n", read[1:])
+		/*
+			time.Sleep(time.Microsecond * 100)
 
-		time.Sleep(time.Microsecond * 100)
+			// set cursor
 
-		testing := []byte{0x03}
-		read2 := make([]byte, len(testing))
-		if err != nil {
-			fmt.Println("cannot display", err)
-			return
-		}
+			time.sleep(time.Microsecond * 100)
 
-		if err := c.Tx(testing, read2); err != nil {
-			log.Fatal(err)
-		}
+			// test print 0
+
+			testing := []byte{0x03}
+			read2 := make([]byte, len(testing))
+			if err != nil {
+				fmt.Println("cannot display", err)
+				return
+			}
+
+			if err := c.Tx(testing, read2); err != nil {
+				log.Fatal(err)
+			}
+		*/
 	}
 }
