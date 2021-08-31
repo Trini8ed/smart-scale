@@ -61,36 +61,35 @@ func main() {
 	defer p.Close()
 
 	// the spi.Port into a spi.Conn so it can be used for communication.
-	c, err := p.Connect(physic.KiloHertz *100 , spi.Mode3, 8)
+	c, err := p.Connect(physic.KiloHertz*100, spi.Mode3, 8)
 	if err != nil {
 		log.Fatal("Connect: ", err)
-	
 
+		// turns on the display
+		displayOn := []byte{0x41, 0xFE}
+		read := make([]byte, len(displayOn))
+		if err != nil {
+			fmt.Println("cannot open LCD device", err)
+			return
+		}
 
-	// turns on the display
-	displayOn := []byte{0x41, 0xFE}
-	read := make([]byte, len(displayOn))
-	if err != nil {
-		fmt.Println("cannot open LCD device", err)
-		return
-	}
+		if err := c.Tx(displayOn, read); err != nil {
+			log.Fatal(err)
+		}
+		// Use read.
+		fmt.Printf("%v\n", read[1:])
 
-	if err := c.Tx(displayOn, read); err != nil {
-		log.Fatal(err)
-	}
-	// Use read.
-	fmt.Printf("%v\n", read[1:])
+		time.Sleep(time.Microsecond * 100)
 
-	time.Sleep(time.Microsecond * 100)
+		testing := []byte{0x03}
+		read2 := make([]byte, len(testing))
+		if err != nil {
+			fmt.Println("cannot display", err)
+			return
+		}
 
-	testing := []byte{0x03}
-	read2 := make([]byte, len(testing))
-	if err != nil {
-		fmt.Println("cannot display", err)
-		return
-	}
-
-	if err := c.Tx(testing, read2); err != nil {
-		log.Fatal(err)
+		if err := c.Tx(testing, read2); err != nil {
+			log.Fatal(err)
+		}
 	}
 }
