@@ -64,52 +64,51 @@ func main() {
 	c, err := p.Connect(physic.KiloHertz, spi.Mode3, 8)
 	if err != nil {
 		log.Fatal("Connect: ", err)
+	}
+	// turns on the display
+	displayOn := []byte{0x41, 0xFE}
+	read := make([]byte, len(displayOn))
+	if err != nil {
+		fmt.Println("cannot open LCD device", err)
+		return
+	}
 
-		// turns on the display
-		displayOn := []byte{0x41, 0xFE}
-		read := make([]byte, len(displayOn))
-		if err != nil {
-			fmt.Println("cannot open LCD device", err)
-			return
-		}
+	if err := c.Tx(displayOn, read); err != nil {
+		log.Fatal(err)
+	}
 
-		if err := c.Tx(displayOn, read); err != nil {
-			log.Fatal(err)
-		}
+	time.Sleep(time.Microsecond * 100)
 
+	displayrate := []byte{0x71, 0xFE}
+	read2 := make([]byte, len(displayrate))
+	if err != nil {
+		fmt.Println("cannot open LCD device", err)
+		return
+	}
+
+	if err := c.Tx(displayrate, read2); err != nil {
+		log.Fatal(err)
+	}
+	// Use read.
+	fmt.Printf("%v\n", read[1:])
+	/*
 		time.Sleep(time.Microsecond * 100)
 
-		displayrate := []byte{0x71, 0xFE}
-		read2 := make([]byte, len(displayrate))
+		// set cursor
+
+		time.sleep(time.Microsecond * 100)
+
+		// test print 0
+
+		testing := []byte{0x03}
+		read2 := make([]byte, len(testing))
 		if err != nil {
-			fmt.Println("cannot open LCD device", err)
+			fmt.Println("cannot display", err)
 			return
 		}
 
-		if err := c.Tx(displayrate, read2); err != nil {
+		if err := c.Tx(testing, read2); err != nil {
 			log.Fatal(err)
 		}
-		// Use read.
-		fmt.Printf("%v\n", read[1:])
-		/*
-			time.Sleep(time.Microsecond * 100)
-
-			// set cursor
-
-			time.sleep(time.Microsecond * 100)
-
-			// test print 0
-
-			testing := []byte{0x03}
-			read2 := make([]byte, len(testing))
-			if err != nil {
-				fmt.Println("cannot display", err)
-				return
-			}
-
-			if err := c.Tx(testing, read2); err != nil {
-				log.Fatal(err)
-			}
-		*/
-	}
+	*/
 }
