@@ -76,6 +76,19 @@ func main() {
 		if err := c.Tx(displayOn, read); err != nil {
 			log.Fatal(err)
 		}
+
+		time.Sleep(time.Microsecond * 100)
+
+		displayrate := []byte{0x71, 0xFE}
+		read2 := make([]byte, len(displayrate))
+		if err != nil {
+			fmt.Println("cannot open LCD device", err)
+			return
+		}
+
+		if err := c.Tx(displayrate, read2); err != nil {
+			log.Fatal(err)
+		}
 		// Use read.
 		fmt.Printf("%v\n", read[1:])
 		/*
