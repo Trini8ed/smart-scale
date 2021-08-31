@@ -83,7 +83,7 @@ func main() {
 
 	// test print 0
 
-	testing := []byte{0x33}
+	testing := []byte{0x03}
 	read2 := make([]byte, len(testing))
 	if err != nil {
 		fmt.Println("cannot display", err)
