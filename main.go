@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"log"
-	"strconv"
 	"time"
 
 	"github.com/MichaelS11/go-hx711"
@@ -13,6 +12,7 @@ import (
 	"periph.io/x/host/v3"
 )
 
+/*
 var numbers = map[int]byte{
 	0: 0x03,
 	1: 0x13,
@@ -33,14 +33,18 @@ var characters = map[string]byte{
 	"d": 0x46,
 }
 
-func compare(data int) {
+func compare(data int, numbers var) {
 
 	//convert int data into string
 	sting_data := strconv.Itoa(data)
 	for i := 0; i < 3; i++ {
 		fmt.Println(sting_data[i : i+1])
+		numbers[i]
+
 	}
+
 }
+*/
 func main() {
 
 	err := hx711.HostInit()
@@ -62,7 +66,7 @@ func main() {
 		fmt.Println("Reset error:", err)
 		return
 	}
-	var data int
+	//var data int
 	for i := 0; i < 5; i++ {
 		time.Sleep(200 * time.Microsecond)
 
@@ -112,7 +116,7 @@ func main() {
 
 	// test print
 
-	testing := []byte{0x72, 0xFE}
+	testing := []byte{0x03}
 	read2 := make([]byte, len(testing))
 	if err != nil {
 		fmt.Println("cannot display", err)
