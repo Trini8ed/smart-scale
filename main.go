@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"strconv"
 	"time"
 
 	"github.com/MichaelS11/go-hx711"
@@ -12,6 +13,34 @@ import (
 	"periph.io/x/host/v3"
 )
 
+var numbers = map[int]byte{
+	0: 0x03,
+	1: 0x13,
+	2: 0x23,
+	3: 0x33,
+	4: 0x43,
+	5: 0x53,
+	6: 0x63,
+	7: 0x73,
+	8: 0x83,
+	9: 0x93,
+}
+
+var characters = map[string]byte{
+	"a": 0x16,
+	"b": 0x26,
+	"c": 0x36,
+	"d": 0x46,
+}
+
+func compare(data int) {
+
+	//convert int data into string
+	sting_data := strconv.Itoa(data)
+	for i := 0; i < 3; i++ {
+		fmt.Println(sting_data[i : i+1])
+	}
+}
 func main() {
 
 	err := hx711.HostInit()
@@ -33,7 +62,7 @@ func main() {
 		fmt.Println("Reset error:", err)
 		return
 	}
-
+	var data int
 	for i := 0; i < 5; i++ {
 		time.Sleep(200 * time.Microsecond)
 
@@ -47,7 +76,6 @@ func main() {
 	}
 
 	// Make sure periph is initialized.
-
 	if _, err := host.Init(); err != nil {
 		fmt.Println("host.Init error:", err)
 		return
@@ -65,6 +93,7 @@ func main() {
 	if err != nil {
 		log.Fatal("Connect: ", err)
 	}
+
 	// turns on the display
 	displayOn := []byte{0x41, 0xFE}
 	read := make([]byte, len(displayOn))
@@ -81,7 +110,7 @@ func main() {
 	fmt.Printf("%v\n", read[1:])
 	time.Sleep(time.Microsecond * 100)
 
-	// test print 0
+	// test print
 
 	testing := []byte{0x72, 0xFE}
 	read2 := make([]byte, len(testing))
