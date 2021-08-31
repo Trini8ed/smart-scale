@@ -61,12 +61,11 @@ func main() {
 	defer p.Close()
 
 	// the spi.Port into a spi.Conn so it can be used for communication.
-	c, err := p.Connect(physic.KiloHertz, spi.Mode3, 8)
+	c, err := p.Connect(physic.KiloHertz *100 , spi.Mode3, 8)
 	if err != nil {
 		log.Fatal("Connect: ", err)
-	}
+	
 
-	// Write 0x10 to the device, and read a byte right after.
 
 	// turns on the display
 	displayOn := []byte{0x41, 0xFE}
@@ -79,25 +78,19 @@ func main() {
 	if err := c.Tx(displayOn, read); err != nil {
 		log.Fatal(err)
 	}
-	/*
-		if _, err := NewRecordRaw(data); err != nil {
-			fmt.Println("cannot read data", err)
-			return
-		}
-	*/
 	// Use read.
 	fmt.Printf("%v\n", read[1:])
 
-	var a1 byte = data
+	time.Sleep(time.Microsecond * 100)
 
-	writestring := []byte{0x00, a1}
-	read2 := make([]byte, len(displayOn))
+	testing := []byte{0x03}
+	read2 := make([]byte, len(testing))
 	if err != nil {
 		fmt.Println("cannot display", err)
 		return
 	}
 
-	if err := c.Tx(writestring, read2); err != nil {
+	if err := c.Tx(testing, read2); err != nil {
 		log.Fatal(err)
 	}
 }
