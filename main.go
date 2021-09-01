@@ -101,7 +101,7 @@ func main() {
 	}
 
 	// turns on the display
-	displayOn := []byte{0x41, 0xFE}
+	displayOn := []byte{0xFE, 0x41}
 	read := make([]byte, len(displayOn))
 	if err != nil {
 		fmt.Println("cannot open LCD device", err)
@@ -118,7 +118,7 @@ func main() {
 
 	// test print
 
-	testing := []byte{0x30}
+	testing := []byte{0x13}
 	read2 := make([]byte, len(testing))
 	if err != nil {
 		fmt.Println("cannot display", err)
