@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"runtime/debug"
 	"time"
 
 	"github.com/MichaelS11/go-hx711"
@@ -47,6 +48,7 @@ func compare(data int, numbers var) {
 */
 func main() {
 
+	debug.SetGCPercent(-1)
 	err := hx711.HostInit()
 	if err != nil {
 		fmt.Println("HostInit error:", err)
