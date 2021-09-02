@@ -140,7 +140,7 @@ func main() {
 			fmt.Println("display number!", err)
 			return
 		}
-
+		time.Sleep(time.Microsecond * 100)
 	}
 
 }
