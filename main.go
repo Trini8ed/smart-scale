@@ -140,18 +140,20 @@ func main() {
 			fmt.Println("display number!", err)
 			return
 		}
-
-		//Move cursor right one place
-		moveCursor := []byte{0xFE, 0x4A}
-		read4 := make([]byte, len(moveCursor))
-		if err != nil {
-			fmt.Println("cannot display LCD device", err)
-			return
-		}
-		if err := c.Tx(moveCursor, read4); err != nil {
-			log.Fatal(err)
-			fmt.Println("Move Cursor!", err)
-			time.Sleep(time.Microsecond * 100)
-		}
+		/*
+			//Move cursor right one place
+			moveCursor := []byte{0xFE, 0x4A}
+			read4 := make([]byte, len(moveCursor))
+			if err != nil {
+				fmt.Println("cannot display LCD device", err)
+				return
+			}
+			if err := c.Tx(moveCursor, read4); err != nil {
+				log.Fatal(err)
+				fmt.Println("Move Cursor!", err)
+				time.Sleep(time.Microsecond * 100)
+			}
+		*/
 	}
+
 }
