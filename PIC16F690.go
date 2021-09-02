@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/MichaelS11/go-hx711"
 )
@@ -50,7 +49,8 @@ func adjustScale() {
 	hx711.GetAdjustValues(weight1, weight2)
 }
 
-func scaleData() (int, int, int) {
+/*
+func scaleData(int) (int, int, int) {
 	for i := 0; i < 1; i++ {
 		//var data int
 		time.Sleep(200 * time.Microsecond)
@@ -62,6 +62,8 @@ func scaleData() (int, int, int) {
 		}
 
 		//fmt.Println(data)
-		return data, data, data
+
 	}
+	return data, data, data
 }
+*/
