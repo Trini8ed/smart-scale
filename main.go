@@ -87,7 +87,7 @@ func main() {
 	/*******************************************************************/
 	//LCD Screen activate
 	// turns on the display
-	displayOn := []byte{0x41, 0xFE}
+	displayOn := []byte{0xFE, 0x41}
 	read := make([]byte, len(displayOn))
 	if err != nil {
 		fmt.Println("cannot open LCD device", err)
