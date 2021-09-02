@@ -43,7 +43,7 @@ func main() {
 
 		time.Sleep(200 * time.Microsecond)
 
-		data, err = hx711.ReadDataRaw()
+		data[i], err = hx711.ReadDataRaw()
 		//hx711.ReadDataRaw(data, error)
 		if err != nil {
 			fmt.Println("ReadDataRaw error:", err)
