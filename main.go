@@ -14,7 +14,6 @@ import (
 )
 
 func main() {
-
 	//Digi Scale
 	err := hx711.HostInit()
 	if err != nil {
