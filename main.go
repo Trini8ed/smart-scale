@@ -38,6 +38,7 @@ func main() {
 
 	//var data int
 	for i := 0; i < 3; i++ {
+		var data int
 		time.Sleep(200 * time.Microsecond)
 
 		data, err := hx711.ReadDataRaw()
@@ -105,7 +106,7 @@ func main() {
 
 	/*******************************************************************/
 	//display on screen
-	var data int = 1234567890
+	//var data int = 1234567890
 	stringNumber := strconv.Itoa(data)
 	runedNumbers := []rune(stringNumber)
 
