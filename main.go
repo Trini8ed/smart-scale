@@ -37,7 +37,7 @@ func main() {
 	}
 
 	var data int
-	for i := 0; i < 3; i++ {
+	for i := 0; i < 1; i++ {
 		//var data int
 		time.Sleep(200 * time.Microsecond)
 
