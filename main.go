@@ -103,7 +103,7 @@ func main() {
 	// Use read.
 	fmt.Printf("%v\n", read[1:])
 
-	time.Sleep(time.Microsecond * 100)
+	time.Sleep(time.Microsecond * 10)
 	var data int = 123
 	stringNumber := strconv.Itoa(data)
 	runedNumbers := []rune(stringNumber)
