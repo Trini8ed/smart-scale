@@ -81,7 +81,7 @@ func main() {
 	defer p.Close()
 
 	// the spi.Port into a spi.Conn so it can be used for communication.
-	c, err := p.Connect(physic.KiloHertz*100, spi.Mode3, 8)
+	c, err := p.Connect(physic.KiloHertz, spi.Mode3, 8)
 	if err != nil {
 		log.Fatal("Connect: ", err)
 	}
@@ -103,8 +103,8 @@ func main() {
 	// Use read.
 	fmt.Printf("%v\n", read[1:])
 
-	time.Sleep(time.Microsecond * 10)
-	var data int = 0
+	time.Sleep(time.Microsecond * 100)
+	var data int = 567
 	stringNumber := strconv.Itoa(data)
 	runedNumbers := []rune(stringNumber)
 
