@@ -48,7 +48,7 @@ func main() {
 		}
 
 		fmt.Println(data)
-		return
+
 	}
 
 	//adjustScale()
