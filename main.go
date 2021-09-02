@@ -36,7 +36,7 @@ func main() {
 		return
 	}
 
-	//var data int
+	var data int
 	for i := 0; i < 3; i++ {
 		var data int
 		time.Sleep(200 * time.Microsecond)
@@ -48,6 +48,7 @@ func main() {
 		}
 
 		fmt.Println(data)
+		return
 	}
 
 	//adjustScale()
