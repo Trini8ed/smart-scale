@@ -53,7 +53,7 @@ func main() {
 	}
 
 	var data int
-	for i := 0; i < 5; i++ {
+	for i := 0; i < 3; i++ {
 		time.Sleep(200 * time.Microsecond)
 
 		data, err := hx711.ReadDataRaw()
