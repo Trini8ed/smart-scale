@@ -69,6 +69,7 @@ func main() {
 	if err != nil {
 		log.Fatal("Connect: ", err)
 	}
+
 	/*******************************************************************/
 	//LCD Screen activate
 	// turns on the display
@@ -85,21 +86,21 @@ func main() {
 	}
 
 	// Use read.
-	//fmt.Printf("%v\n", read[1:])
 
 	time.Sleep(time.Microsecond * 100)
 	/*******************************************************************/
-	displayAddress := []byte{0xFE, 0x51}
-	read2 := make([]byte, len(displayAddress))
+	clearScreen := []byte{0xFE, 0x51}
+	read2 := make([]byte, len(clearScreen))
 	if err != nil {
 		fmt.Println("cannot open LCD device", err)
 		return
 	}
 
-	if err := c.Tx(displayAddress, read2); err != nil {
+	if err := c.Tx(clearScreen, read2); err != nil {
 		fmt.Println("LCD Turned On!", err)
 		log.Fatal(err)
 	}
+	time.Sleep(time.Microsecond * 100)
 
 	/*******************************************************************/
 	//display on screen
