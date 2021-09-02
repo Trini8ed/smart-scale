@@ -36,7 +36,7 @@ func main() {
 		return
 	}
 
-	var data int
+	//var data int
 	//scaleData()
 	for i := 0; i < 1; i++ {
 		var data int
@@ -50,7 +50,7 @@ func main() {
 		fmt.Println(data)
 		return
 	}
-	fmt.Println(data)
+	//fmt.Println(data)
 	//adjustScale()
 	/*******************************************************************/
 	//SPI
@@ -107,7 +107,7 @@ func main() {
 
 	/*******************************************************************/
 	//display on screen
-	//var data int = 1234567890
+	var data int = 1234567890
 	stringNumber := strconv.Itoa(data)
 	runedNumbers := []rune(stringNumber)
 
