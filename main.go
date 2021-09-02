@@ -6,7 +6,6 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/MichaelS11/go-hx711"
 	"periph.io/x/conn/v3/physic"
 	"periph.io/x/conn/v3/spi"
 	"periph.io/x/conn/v3/spi/spireg"
@@ -31,39 +30,41 @@ var characterMap = map[rune]byte{
 }
 
 func main() {
-	//Digi Scale
-	err := hx711.HostInit()
-	if err != nil {
-		fmt.Println("HostInit error:", err)
-		return
-	}
-
-	hx711, err := hx711.NewHx711("GPIO6", "GPIO5")
-	if err != nil {
-		fmt.Println("NewHx711 error:", err)
-		return
-	}
-
-	defer hx711.Shutdown()
-
-	err = hx711.Reset()
-	if err != nil {
-		fmt.Println("Reset error:", err)
-		return
-	}
-
-	var data int
-	for i := 0; i < 3; i++ {
-		time.Sleep(200 * time.Microsecond)
-
-		data, err := hx711.ReadDataRaw()
+	/*
+		//Digi Scale
+		err := hx711.HostInit()
 		if err != nil {
-			fmt.Println("ReadDataRaw error:", err)
-			continue
+			fmt.Println("HostInit error:", err)
+			return
 		}
 
-		fmt.Println(data)
-	}
+		hx711, err := hx711.NewHx711("GPIO6", "GPIO5")
+		if err != nil {
+			fmt.Println("NewHx711 error:", err)
+			return
+		}
+
+		defer hx711.Shutdown()
+
+		err = hx711.Reset()
+		if err != nil {
+			fmt.Println("Reset error:", err)
+			return
+		}
+
+		var data int
+		for i := 0; i < 3; i++ {
+			time.Sleep(200 * time.Microsecond)
+
+			data, err := hx711.ReadDataRaw()
+			if err != nil {
+				fmt.Println("ReadDataRaw error:", err)
+				continue
+			}
+
+			fmt.Println(data)
+		}
+	*/
 	/*******************************************************************/
 	//SPI
 	// Make sure periph is initialized.
@@ -95,6 +96,7 @@ func main() {
 	}
 
 	if err := c.Tx(displayOn, read); err != nil {
+		fmt.Println("LCD Turned On!", err)
 		log.Fatal(err)
 	}
 
@@ -102,7 +104,7 @@ func main() {
 	fmt.Printf("%v\n", read[1:])
 
 	time.Sleep(time.Microsecond * 100)
-
+	var data int = 123
 	stringNumber := strconv.Itoa(data)
 	runedNumbers := []rune(stringNumber)
 
@@ -122,6 +124,20 @@ func main() {
 			fmt.Println("display number!", err)
 			return
 		}
+
+		//Move cursor right one place
+		moveCursor := []byte{0xFE, 0x4A}
+		read3 := make([]byte, len(moveCursor))
+		if err != nil {
+			fmt.Println("cannot display LCD device", err)
+			return
+		}
+		if err := c.Tx(moveCursor, read3); err != nil {
+			log.Fatal(err)
+			fmt.Println("Move Cursor!", err)
+			time.Sleep(time.Microsecond * 100)
+		}
+
 	}
 
 }
