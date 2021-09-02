@@ -118,6 +118,8 @@ func main() {
 
 		if err := c.Tx(displaynumber, read2); err != nil {
 			log.Fatal(err)
+			fmt.Println("display number!", err)
+			return
 		}
 	}
 
