@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"log"
-	"strconv"
 	"time"
 
 	"periph.io/x/conn/v3/physic"
@@ -88,7 +87,7 @@ func main() {
 	/*******************************************************************/
 	//LCD Screen activate
 	// turns on the display
-	displayOn := []byte{0xFE, 0x42}
+	displayOn := []byte{0xFE, 0x41}
 	read := make([]byte, len(displayOn))
 	if err != nil {
 		fmt.Println("cannot open LCD device", err)
@@ -101,11 +100,11 @@ func main() {
 	}
 
 	// Use read.
-	fmt.Printf("%v\n", read[1:])
+	//fmt.Printf("%v\n", read[1:])
 
 	time.Sleep(time.Microsecond * 100)
 	/*******************************************************************/
-	clearScreen := []byte{0xFE, 0x41}
+	clearScreen := []byte{0xFE, 0x62}
 	read2 := make([]byte, len(clearScreen))
 	if err != nil {
 		fmt.Println("cannot open LCD device", err)
@@ -116,41 +115,43 @@ func main() {
 		fmt.Println("LCD Turned On!", err)
 		log.Fatal(err)
 	}
+
 	/*******************************************************************/
 	//display on screen
-	var data int = 01234567
-	stringNumber := strconv.Itoa(data)
-	runedNumbers := []rune(stringNumber)
+	/*
+		var data int = 01234567
+		stringNumber := strconv.Itoa(data)
+		runedNumbers := []rune(stringNumber)
 
-	for _, r := range runedNumbers {
-		fmt.Printf("Rune: %v Hex: 0x%x\n", strconv.QuoteRune(r), characterMap[r])
+		for _, r := range runedNumbers {
+			fmt.Printf("Rune: %v Hex: 0x%x\n", strconv.QuoteRune(r), characterMap[r])
 
-		// display number on LCD screen
-		displaynumber := []byte{characterMap[r]}
-		read3 := make([]byte, len(displaynumber))
-		if err != nil {
-			fmt.Println("cannot display LCD device", err)
-			return
+			// display number on LCD screen
+			displaynumber := []byte{characterMap[r]}
+			read3 := make([]byte, len(displaynumber))
+			if err != nil {
+				fmt.Println("cannot display LCD device", err)
+				return
+			}
+
+			if err := c.Tx(displaynumber, read3); err != nil {
+				log.Fatal(err)
+				fmt.Println("display number!", err)
+				return
+			}
+
+			//Move cursor right one place
+			moveCursor := []byte{0xFE, 0x4A}
+			read4 := make([]byte, len(moveCursor))
+			if err != nil {
+				fmt.Println("cannot display LCD device", err)
+				return
+			}
+			if err := c.Tx(moveCursor, read4); err != nil {
+				log.Fatal(err)
+				fmt.Println("Move Cursor!", err)
+				time.Sleep(time.Microsecond * 100)
+			}
 		}
-
-		if err := c.Tx(displaynumber, read3); err != nil {
-			log.Fatal(err)
-			fmt.Println("display number!", err)
-			return
-		}
-
-		//Move cursor right one place
-		moveCursor := []byte{0xFE, 0x4A}
-		read4 := make([]byte, len(moveCursor))
-		if err != nil {
-			fmt.Println("cannot display LCD device", err)
-			return
-		}
-		if err := c.Tx(moveCursor, read4); err != nil {
-			log.Fatal(err)
-			fmt.Println("Move Cursor!", err)
-			time.Sleep(time.Microsecond * 100)
-		}
-	}
-
+	*/
 }
