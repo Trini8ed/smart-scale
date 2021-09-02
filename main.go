@@ -104,6 +104,8 @@ func main() {
 	fmt.Printf("%v\n", read[1:])
 
 	time.Sleep(time.Microsecond * 100)
+	/*******************************************************************/
+	//display on screen
 	var data int = 01234567
 	stringNumber := strconv.Itoa(data)
 	runedNumbers := []rune(stringNumber)
@@ -137,7 +139,6 @@ func main() {
 			fmt.Println("Move Cursor!", err)
 			time.Sleep(time.Microsecond * 100)
 		}
-
 	}
 
 }
