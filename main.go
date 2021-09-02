@@ -56,13 +56,14 @@ func main() {
 	for i := 0; i < 3; i++ {
 		time.Sleep(200 * time.Microsecond)
 
-		data, err := hx711.ReadDataRaw()
+		//data,
+		err := hx711.ReadDataRaw()
 		if err != nil {
 			fmt.Println("ReadDataRaw error:", err)
 			continue
 		}
 
-		fmt.Println(data)
+		//fmt.Println(data)
 	}
 	/*******************************************************************/
 	//SPI
@@ -100,6 +101,7 @@ func main() {
 
 	// Use read.
 	fmt.Printf("%v\n", read[1:])
+
 	time.Sleep(time.Microsecond * 100)
 
 	stringNumber := strconv.Itoa(data)
