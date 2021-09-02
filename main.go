@@ -105,6 +105,18 @@ func main() {
 
 	time.Sleep(time.Microsecond * 100)
 	/*******************************************************************/
+	clearScreen := []byte{0xFE, 0x41}
+	read2 := make([]byte, len(clearScreen))
+	if err != nil {
+		fmt.Println("cannot open LCD device", err)
+		return
+	}
+
+	if err := c.Tx(clearScreen, read2); err != nil {
+		fmt.Println("LCD Turned On!", err)
+		log.Fatal(err)
+	}
+	/*******************************************************************/
 	//display on screen
 	var data int = 01234567
 	stringNumber := strconv.Itoa(data)
@@ -115,13 +127,13 @@ func main() {
 
 		// display number on LCD screen
 		displaynumber := []byte{characterMap[r]}
-		read2 := make([]byte, len(displaynumber))
+		read3 := make([]byte, len(displaynumber))
 		if err != nil {
 			fmt.Println("cannot display LCD device", err)
 			return
 		}
 
-		if err := c.Tx(displaynumber, read2); err != nil {
+		if err := c.Tx(displaynumber, read3); err != nil {
 			log.Fatal(err)
 			fmt.Println("display number!", err)
 			return
@@ -129,12 +141,12 @@ func main() {
 
 		//Move cursor right one place
 		moveCursor := []byte{0xFE, 0x4A}
-		read3 := make([]byte, len(moveCursor))
+		read4 := make([]byte, len(moveCursor))
 		if err != nil {
 			fmt.Println("cannot display LCD device", err)
 			return
 		}
-		if err := c.Tx(moveCursor, read3); err != nil {
+		if err := c.Tx(moveCursor, read4); err != nil {
 			log.Fatal(err)
 			fmt.Println("Move Cursor!", err)
 			time.Sleep(time.Microsecond * 100)
