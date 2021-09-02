@@ -104,7 +104,7 @@ func main() {
 
 	time.Sleep(time.Microsecond * 100)
 	/*******************************************************************/
-	clearScreen := []byte{0x62, 0xFE}
+	clearScreen := []byte{0xFE, 0x62}
 	read2 := make([]byte, len(clearScreen))
 	if err != nil {
 		fmt.Println("cannot open LCD device", err)
