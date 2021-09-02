@@ -41,7 +41,8 @@ func main() {
 		//var data int
 		time.Sleep(200 * time.Microsecond)
 
-		data, err := hx711.ReadDataRaw()
+		//data,
+		err := hx711.ReadDataRaw()
 		if err != nil {
 			fmt.Println("ReadDataRaw error:", err)
 			continue
@@ -51,7 +52,7 @@ func main() {
 		fmt.Println(data)
 		return
 	}
-
+	fmt.Println(data)
 	//adjustScale()
 	/*******************************************************************/
 	//SPI
