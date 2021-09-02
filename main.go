@@ -104,7 +104,7 @@ func main() {
 
 	time.Sleep(time.Microsecond * 100)
 	/*******************************************************************/
-	displayAddress := []byte{0xFE, 0x72}
+	displayAddress := []byte{0xFE, 0x51}
 	read2 := make([]byte, len(displayAddress))
 	if err != nil {
 		fmt.Println("cannot open LCD device", err)
