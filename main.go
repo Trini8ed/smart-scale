@@ -50,6 +50,7 @@ func main() {
 		fmt.Println(data)
 		return
 	}
+	fmt.Println(data)
 	//adjustScale()
 	/*******************************************************************/
 	//SPI
