@@ -37,7 +37,7 @@ func main() {
 	}
 
 	var data int
-	scaleData()
+	//scaleData()
 	/*
 		for i := 0; i < 1; i++ {
 			//var data int
@@ -50,9 +50,14 @@ func main() {
 			}
 
 			//fmt.Println(data)
-			close (data)
+			close(data)
 		}
 	*/
+	time.Sleep(200 * time.Microsecond)
+	data = hx711.ReadDataRaw()
+	if err != nil {
+		fmt.Println("ReadDataRaw error:", err)
+	}
 	fmt.Println(data)
 	//adjustScale()
 	/*******************************************************************/
