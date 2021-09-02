@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"strconv"
 	"time"
 
 	"periph.io/x/conn/v3/physic"
@@ -118,40 +119,39 @@ func main() {
 
 	/*******************************************************************/
 	//display on screen
-	/*
-		var data int = 01234567
-		stringNumber := strconv.Itoa(data)
-		runedNumbers := []rune(stringNumber)
 
-		for _, r := range runedNumbers {
-			fmt.Printf("Rune: %v Hex: 0x%x\n", strconv.QuoteRune(r), characterMap[r])
+	var data int = 0123
+	stringNumber := strconv.Itoa(data)
+	runedNumbers := []rune(stringNumber)
 
-			// display number on LCD screen
-			displaynumber := []byte{characterMap[r]}
-			read3 := make([]byte, len(displaynumber))
-			if err != nil {
-				fmt.Println("cannot display LCD device", err)
-				return
-			}
+	for _, r := range runedNumbers {
+		fmt.Printf("Rune: %v Hex: 0x%x\n", strconv.QuoteRune(r), characterMap[r])
 
-			if err := c.Tx(displaynumber, read3); err != nil {
-				log.Fatal(err)
-				fmt.Println("display number!", err)
-				return
-			}
-
-			//Move cursor right one place
-			moveCursor := []byte{0xFE, 0x4A}
-			read4 := make([]byte, len(moveCursor))
-			if err != nil {
-				fmt.Println("cannot display LCD device", err)
-				return
-			}
-			if err := c.Tx(moveCursor, read4); err != nil {
-				log.Fatal(err)
-				fmt.Println("Move Cursor!", err)
-				time.Sleep(time.Microsecond * 100)
-			}
+		// display number on LCD screen
+		displaynumber := []byte{characterMap[r]}
+		read3 := make([]byte, len(displaynumber))
+		if err != nil {
+			fmt.Println("cannot display LCD device", err)
+			return
 		}
-	*/
+
+		if err := c.Tx(displaynumber, read3); err != nil {
+			log.Fatal(err)
+			fmt.Println("display number!", err)
+			return
+		}
+
+		//Move cursor right one place
+		moveCursor := []byte{0xFE, 0x4A}
+		read4 := make([]byte, len(moveCursor))
+		if err != nil {
+			fmt.Println("cannot display LCD device", err)
+			return
+		}
+		if err := c.Tx(moveCursor, read4); err != nil {
+			log.Fatal(err)
+			fmt.Println("Move Cursor!", err)
+			time.Sleep(time.Microsecond * 100)
+		}
+	}
 }
