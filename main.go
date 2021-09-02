@@ -104,7 +104,7 @@ func main() {
 
 	/*******************************************************************/
 	//display on screen
-
+	var data int = 123
 	stringNumber := strconv.Itoa(data)
 	runedNumbers := []rune(stringNumber)
 
