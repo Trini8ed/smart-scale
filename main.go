@@ -80,7 +80,7 @@ func main() {
 	defer p.Close()
 
 	// the spi.Port into a spi.Conn so it can be used for communication.
-	c, err := p.Connect(physic.KiloHertz, spi.Mode3, 0) //8
+	c, err := p.Connect(physic.KiloHertz, spi.Mode3, 8)
 	if err != nil {
 		log.Fatal("Connect: ", err)
 	}
@@ -104,14 +104,14 @@ func main() {
 
 	time.Sleep(time.Microsecond * 100)
 	/*******************************************************************/
-	clearScreen := []byte{0xFE, 0x62}
-	read2 := make([]byte, len(clearScreen))
+	displayAddress := []byte{0xFE, 0x72}
+	read2 := make([]byte, len(displayAddress))
 	if err != nil {
 		fmt.Println("cannot open LCD device", err)
 		return
 	}
 
-	if err := c.Tx(clearScreen, read2); err != nil {
+	if err := c.Tx(displayAddress, read2); err != nil {
 		fmt.Println("LCD Turned On!", err)
 		log.Fatal(err)
 	}
