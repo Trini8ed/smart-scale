@@ -104,7 +104,7 @@ func main() {
 	fmt.Printf("%v\n", read[1:])
 
 	time.Sleep(time.Microsecond * 100)
-	var data int = 567
+	var data int = 01234567
 	stringNumber := strconv.Itoa(data)
 	runedNumbers := []rune(stringNumber)
 
