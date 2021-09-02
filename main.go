@@ -80,7 +80,7 @@ func main() {
 	defer p.Close()
 
 	// the spi.Port into a spi.Conn so it can be used for communication.
-	c, err := p.Connect(physic.KiloHertz, spi.Mode3, 8)
+	c, err := p.Connect(physic.KiloHertz, spi.Mode3, 0) //8
 	if err != nil {
 		log.Fatal("Connect: ", err)
 	}
