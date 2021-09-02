@@ -46,10 +46,9 @@ func main() {
 		if err != nil {
 			fmt.Println("ReadDataRaw error:", err)
 			continue
-			return
 		}
 
-		fmt.Println(data)
+		//fmt.Println(data)
 		return
 	}
 	fmt.Println(data)
