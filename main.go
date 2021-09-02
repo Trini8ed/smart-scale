@@ -37,20 +37,22 @@ func main() {
 	}
 
 	var data int
-	for i := 0; i < 1; i++ {
-		//var data int
-		time.Sleep(200 * time.Microsecond)
+	scaleData()
+	/*
+		for i := 0; i < 1; i++ {
+			//var data int
+			time.Sleep(200 * time.Microsecond)
 
-		//data,
-		err := hx711.ReadDataRaw()
-		if err != nil {
-			fmt.Println("ReadDataRaw error:", err)
-			continue
+			data, err := hx711.ReadDataRaw()
+			if err != nil {
+				fmt.Println("ReadDataRaw error:", err)
+				continue
+			}
+
+			//fmt.Println(data)
+			close (data)
 		}
-
-		//fmt.Println(data)
-		return
-	}
+	*/
 	fmt.Println(data)
 	//adjustScale()
 	/*******************************************************************/
