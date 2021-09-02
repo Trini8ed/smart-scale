@@ -56,14 +56,13 @@ func main() {
 	for i := 0; i < 3; i++ {
 		time.Sleep(200 * time.Microsecond)
 
-		//data,
-		err := hx711.ReadDataRaw()
+		data, err := hx711.ReadDataRaw()
 		if err != nil {
 			fmt.Println("ReadDataRaw error:", err)
 			continue
 		}
 
-		//fmt.Println(data)
+		fmt.Println(data)
 	}
 	/*******************************************************************/
 	//SPI
