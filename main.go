@@ -6,6 +6,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/MichaelS11/go-hx711"
 	"periph.io/x/conn/v3/physic"
 	"periph.io/x/conn/v3/spi"
 	"periph.io/x/conn/v3/spi/spireg"
@@ -13,43 +14,43 @@ import (
 )
 
 func main() {
-	/*
-		//Digi Scale
-		err := hx711.HostInit()
+
+	//Digi Scale
+	err := hx711.HostInit()
+	if err != nil {
+		fmt.Println("HostInit error:", err)
+		return
+	}
+
+	hx711, err := hx711.NewHx711("GPIO6", "GPIO5")
+	if err != nil {
+		fmt.Println("NewHx711 error:", err)
+		return
+	}
+
+	defer hx711.Shutdown()
+
+	err = hx711.Reset()
+	if err != nil {
+		fmt.Println("Reset error:", err)
+		return
+	}
+
+	var data [5]int
+	//scaleData()
+	for i := 0; i < 5; i++ {
+		//var data [5]int
+
+		time.Sleep(200 * time.Microsecond)
+
+		//data, err = hdx711.ReadDataRaw()
+		hdx711.ReadDataRaw(data, error)
 		if err != nil {
-			fmt.Println("HostInit error:", err)
-			return
+			fmt.Println("ReadDataRaw error:", err)
+			continue
 		}
-
-		hx711, err := hx711.NewHx711("GPIO6", "GPIO5")
-		if err != nil {
-			fmt.Println("NewHx711 error:", err)
-			return
-		}
-
-		defer hx711.Shutdown()
-
-		err = hx711.Reset()
-		if err != nil {
-			fmt.Println("Reset error:", err)
-			return
-		}
-
-		//var data int
-		//scaleData()
-		for i := 0; i < 1; i++ {
-			var data int
-			time.Sleep(200 * time.Microsecond)
-
-			data, err = hx711.ReadDataRaw()
-			if err != nil {
-				fmt.Println("ReadDataRaw error:", err)
-				continue
-			}
-			fmt.Println(data)
-			return
-		}
-	*/
+	}
+	fmt.Println(data)
 	//fmt.Println(data)
 	//adjustScale()
 	/*******************************************************************/
@@ -107,8 +108,8 @@ func main() {
 
 	/*******************************************************************/
 	//display on screen
-	var data int = 1234567890
-	stringNumber := strconv.Itoa(data)
+	//var data int = 1234567890
+	stringNumber := strconv.Itoa(data[4])
 	runedNumbers := []rune(stringNumber)
 
 	for _, r := range runedNumbers {

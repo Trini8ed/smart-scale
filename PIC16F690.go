@@ -50,7 +50,7 @@ func adjustScale() {
 }
 
 /*
-func scaleData(int) (int, int, int) {
+func scaleData(int,) () {
 	for i := 0; i < 1; i++ {
 		//var data int
 		time.Sleep(200 * time.Microsecond)
@@ -65,5 +65,6 @@ func scaleData(int) (int, int, int) {
 
 	}
 	return data, data, data
+
 }
 */
