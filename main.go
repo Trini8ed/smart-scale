@@ -13,23 +13,6 @@ import (
 	"periph.io/x/host/v3"
 )
 
-var characterMap = map[rune]byte{
-	'0': 0x30,
-	'1': 0x31,
-	'2': 0x32,
-	'3': 0x33,
-	'4': 0x34,
-	'5': 0x35,
-	'6': 0x36,
-	'7': 0x37,
-	'8': 0x38,
-	'9': 0x39,
-	'a': 0x16,
-	'b': 0x26,
-	'c': 0x36,
-	'd': 0x46,
-}
-
 func main() {
 
 	//Digi Scale
