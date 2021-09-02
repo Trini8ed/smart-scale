@@ -13,7 +13,7 @@ import (
 	"periph.io/x/host/v3"
 )
 
-var caharacterMap = map[rune]byte{
+var characterMap = map[rune]byte{
 	'0': 0x03,
 	'1': 0x13,
 	'2': 0x23,
@@ -80,7 +80,7 @@ func main() {
 	defer p.Close()
 
 	// the spi.Port into a spi.Conn so it can be used for communication.
-	c, err := p.Connect(physic.KiloHertz*10, spi.Mode3, 8)
+	c, err := p.Connect(physic.KiloHertz*100, spi.Mode3, 8)
 	if err != nil {
 		log.Fatal("Connect: ", err)
 	}
@@ -106,6 +106,19 @@ func main() {
 	runedNumbers := []rune(stringNumber)
 
 	for _, r := range runedNumbers {
-		fmt.Printf("Rune: %v Hex: 0x%x\n", strconv.QuoteRune(r), caharacterMap[r])
+		fmt.Printf("Rune: %v Hex: 0x%x\n", strconv.QuoteRune(r), characterMap[r])
+
+		// display number on LCD screen
+		displaynumber := []byte{characterMap[r]}
+		read2 := make([]byte, len(displaynumber))
+		if err != nil {
+			fmt.Println("cannot display LCD device", err)
+			return
+		}
+
+		if err := c.Tx(displaynumber, read2); err != nil {
+			log.Fatal(err)
+		}
 	}
+
 }
