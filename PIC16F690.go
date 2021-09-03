@@ -49,22 +49,25 @@ func adjustScale() {
 	hx711.GetAdjustValues(weight1, weight2)
 }
 
-/*
-func scaleData(int,) () {
-	for i := 0; i < 1; i++ {
-		//var data int
-		time.Sleep(200 * time.Microsecond)
-
-		data, err := hx711.ReadDataRaw()
-		if err != nil {
-			fmt.Println("ReadDataRaw error:", err)
-			continue
-		}
-
-		//fmt.Println(data)
-
+func initialScale() {
+	err := hx711.HostInit()
+	if err != nil {
+		fmt.Println("HostInit error:", err)
+		return
 	}
-	return data, data, data
+
+	hx711, err := hx711.NewHx711("GPIO6", "GPIO5")
+	if err != nil {
+		fmt.Println("NewHx711 error:", err)
+		return
+	}
+
+	defer hx711.Shutdown()
+
+	err = hx711.Reset()
+	if err != nil {
+		fmt.Println("Reset error:", err)
+		return
+	}
 
 }
-*/
