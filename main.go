@@ -38,6 +38,8 @@ func main() {
 	}
 
 	var data [5]int
+
+	fmt.Println("Weight will be weighted down in 5 seconds...")
 	//scaleData()
 	for i := 0; i < 5; i++ {
 		//var data [5]int

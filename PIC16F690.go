@@ -28,7 +28,7 @@ var characterMap = map[rune]byte{
 	'd': 0x46,
 }
 
-func adjustScale() {
+func calibrate() {
 	err := hx711.HostInit()
 	if err != nil {
 		fmt.Println("HostInit error:", err)
@@ -54,30 +54,7 @@ func adjustScale() {
 	hx711.GetAdjustValues(weight1, weight2)
 }
 
-func initialScale() {
-	err := hx711.HostInit()
-	if err != nil {
-		fmt.Println("HostInit error:", err)
-		return
-	}
-
-	hx711, err := hx711.NewHx711("GPIO6", "GPIO5")
-	if err != nil {
-		fmt.Println("NewHx711 error:", err)
-		return
-	}
-
-	defer hx711.Shutdown()
-
-	err = hx711.Reset()
-	if err != nil {
-		fmt.Println("Reset error:", err)
-		return
-	}
-
-}
-
-func initializeScale() {
+func lcdDisplay(data rune, characterMap map[rune]byte) {
 	if _, err := host.Init(); err != nil {
 		fmt.Println("host.Init error:", err)
 		return
@@ -95,4 +72,13 @@ func initializeScale() {
 	if err != nil {
 		log.Fatal("Connect: ", err)
 	}
+
+	lcdDisplay := []byte{characterMap(data)}
+	read := make([]byte, len(lcdDisplay))
+
+	if err := c.Tx(lcdDisplay, read); err != nil {
+		fmt.Println("LCD Turned On!", err)
+		log.Fatal(err)
+	}
+
 }
