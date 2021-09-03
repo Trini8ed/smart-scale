@@ -14,29 +14,29 @@ import (
 )
 
 func main() {
-	initialScale()
-	/*
-		//Digi Scale
-		err := hx711.HostInit()
-		if err != nil {
-			fmt.Println("HostInit error:", err)
-			return
-		}
+	//initialScale()
 
-		hx711, err := hx711.NewHx711("GPIO6", "GPIO5")
-		if err != nil {
-			fmt.Println("NewHx711 error:", err)
-			return
-		}
+	//Digi Scale
+	err := hx711.HostInit()
+	if err != nil {
+		fmt.Println("HostInit error:", err)
+		return
+	}
 
-		defer hx711.Shutdown()
+	hx711, err := hx711.NewHx711("GPIO6", "GPIO5")
+	if err != nil {
+		fmt.Println("NewHx711 error:", err)
+		return
+	}
 
-		err = hx711.Reset()
-		if err != nil {
-			fmt.Println("Reset error:", err)
-			return
-		}
-	*/
+	defer hx711.Shutdown()
+
+	err = hx711.Reset()
+	if err != nil {
+		fmt.Println("Reset error:", err)
+		return
+	}
+
 	var data [5]int
 	//scaleData()
 	for i := 0; i < 5; i++ {

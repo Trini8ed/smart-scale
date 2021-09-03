@@ -2,8 +2,13 @@ package main
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/MichaelS11/go-hx711"
+	"periph.io/x/conn/v3/physic"
+	"periph.io/x/conn/v3/spi"
+	"periph.io/x/conn/v3/spi/spireg"
+	"periph.io/x/host/v3"
 )
 
 var characterMap = map[rune]byte{
@@ -70,4 +75,24 @@ func initialScale() {
 		return
 	}
 
+}
+
+func initializeScale() {
+	if _, err := host.Init(); err != nil {
+		fmt.Println("host.Init error:", err)
+		return
+	}
+
+	// Use spireg SPI port registry to find the first available SPI bus.
+	p, err := spireg.Open("")
+	if err != nil {
+		log.Fatal("Open: ", err)
+	}
+	defer p.Close()
+
+	// the spi.Port into a spi.Conn so it can be used for communication.
+	c, err := p.Connect(physic.KiloHertz, spi.Mode3, 8)
+	if err != nil {
+		log.Fatal("Connect: ", err)
+	}
 }
