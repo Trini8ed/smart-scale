@@ -73,7 +73,7 @@ func lcdDisplay(data rune, characterMap map[rune]byte) {
 		log.Fatal("Connect: ", err)
 	}
 
-	lcdDisplay := []byte{characterMap(data)}
+	lcdDisplay := []byte{characterMap[data]}
 	read := make([]byte, len(lcdDisplay))
 
 	if err := c.Tx(lcdDisplay, read); err != nil {
