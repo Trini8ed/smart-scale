@@ -11,7 +11,7 @@ import (
 	"google.golang.org/api/option"
 )
 
-func example() {
+func database(data int) {
 	// Get the database initalized
 	client, ctx, err := FirebaseInstance()
 	if err != nil {
@@ -19,10 +19,11 @@ func example() {
 	}
 
 	// Simple counter
-	var counter int
+	//var counter int
 
 	for {
 		// Example read of data
+		fmt.Printf("data value %v\n", data)
 		dsnap, err := client.Collection("orders").Doc("example").Get(ctx)
 		if err != nil {
 			panic(err)
@@ -32,24 +33,23 @@ func example() {
 		fmt.Printf("Read Document data: %#v\n", order)
 
 		// Wait some period of time
-		time.Sleep(time.Second * 3)
+		time.Sleep(time.Second * 2)
+
+		//fmt.Printf("Increasing old Weight form %v to %v\n", order.Weight, counter)
+		fmt.Printf("Update old Weight from %v to %v\n", order.Weight, data)
 
 		// Update counter from the database
-		counter = order.Weight
-
-		// Increase country
-		counter += 10
-
-		fmt.Printf("Increasing old Weight form %v to %v\n", order.Weight, counter)
+		order.Weight = data
 
 		// Wait some period of time
-		time.Sleep(time.Second * 3)
+		time.Sleep(time.Second * 2)
 
 		// Example write of data
 		_, err = client.Collection("orders").Doc("example").Update(ctx, []firestore.Update{
 			{
-				Path:  "weight",
-				Value: counter,
+				Path: "weight",
+				//Value: counter,
+				Value: data,
 			},
 		})
 		if err != nil {
