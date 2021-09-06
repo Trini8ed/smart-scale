@@ -40,7 +40,7 @@ func main() {
 			continue
 		}
 
-		fmt.Println(data)
+		fmt.Println(data[i])
 	}
 
 	/*******************************************************************/
