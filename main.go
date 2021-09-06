@@ -30,11 +30,11 @@ func main() {
 		return
 	}
 
-	var data int
+	var data [4]int
 	for i := 0; i < 3; i++ {
 		time.Sleep(200 * time.Microsecond)
 
-		data, err := hx711.ReadDataRaw()
+		data[i], err = hx711.ReadDataRaw()
 		if err != nil {
 			fmt.Println("ReadDataRaw error:", err)
 			continue
@@ -125,5 +125,5 @@ func main() {
 		}
 	*/
 	//var data int = 400
-	database(data)
+	//database(data)
 }
