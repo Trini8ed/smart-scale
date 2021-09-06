@@ -2,6 +2,7 @@ package main
 
 func main() {
 	calibrate()
+	getWeight()
 	/*
 		//Digi Scale
 		err := hx711.HostInit()
