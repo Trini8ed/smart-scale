@@ -131,5 +131,5 @@ func main() {
 	}
 
 	//var data int = 400
-	//database(data[3])
+	database(data[3])
 }
