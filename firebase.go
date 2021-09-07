@@ -60,6 +60,7 @@ func database(data int) {
 		}
 		// Wait some period of time
 		time.Sleep(time.Second * 3)
+		return
 	}
 }
 
