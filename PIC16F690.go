@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"strconv"
 	"time"
 
 	"github.com/MichaelS11/go-hx711"
@@ -53,6 +54,12 @@ func calibrate() {
 	weight2 = 0.45
 
 	hx711.GetAdjustValues(weight1, weight2)
+}
+
+func floattostr(input_num float64) string {
+
+	// to convert a float number to a string
+	return strconv.FormatFloat(input_num, 'g', 1, 64)
 }
 
 func lcdDisplay(data rune, characterMap map[rune]byte) {
@@ -113,7 +120,7 @@ func getWeight() {
 			fmt.Println("ReadDataMedian error:", err)
 			continue
 		}
-
-		fmt.Println(data)
+		//fmt.Println(data)
+		fmt.Println(floattostr(data))
 	}
 }
