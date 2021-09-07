@@ -122,6 +122,7 @@ func getWeight(data [5]float64) {
 			continue
 		}
 		fmt.Println(data[i])
-		return
+
 	}
+	return
 }
