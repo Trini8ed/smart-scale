@@ -90,7 +90,7 @@ func lcdDisplay(data rune, characterMap map[rune]byte) {
 	}
 
 }
-func getWeight() {
+func getWeight(data [5]float64) {
 	err := hx711.HostInit()
 	if err != nil {
 		fmt.Println("HostInit error:", err)
@@ -111,16 +111,17 @@ func getWeight() {
 	hx711.AdjustZero = 5507
 	hx711.AdjustScale = 30904
 
-	var data float64
-	for i := 0; i < 10000; i++ {
+	//var data[5] float64
+	for i := 0; i < 5; i++ {
+
 		time.Sleep(200 * time.Microsecond)
 
-		data, err = hx711.ReadDataMedian(11)
+		data[i], err = hx711.ReadDataMedian(11)
 		if err != nil {
 			fmt.Println("ReadDataMedian error:", err)
 			continue
 		}
-		//fmt.Println(data)
-		fmt.Println(floattostr(data))
+		//fmt.Println(data[i])
+		return
 	}
 }

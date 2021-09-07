@@ -1,8 +1,15 @@
 package main
 
+import "fmt"
+
 func main() {
 	//calibrate()
-	getWeight()
+	var data [5]float64
+	getWeight(data)
+	for i := 0; i < 5; i++ {
+		fmt.Println(floattostr(data[i]))
+	}
+
 	/*
 		//Digi Scale
 		err := hx711.HostInit()
