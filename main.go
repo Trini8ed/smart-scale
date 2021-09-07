@@ -1,7 +1,7 @@
 package main
 
 func main() {
-	calibrate()
+	//calibrate()
 	getWeight()
 	/*
 		//Digi Scale
