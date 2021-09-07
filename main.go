@@ -17,46 +17,7 @@ func main() {
 	//calibrate()
 	//var data [5]float64
 	//getWeight(data)
-	/*
-			err := hx711.HostInit()
-			if err != nil {
-				fmt.Println("HostInit error:", err)
-				return
-			}
 
-			hx711, err := hx711.NewHx711("GPIO6", "GPIO5")
-			if err != nil {
-				fmt.Println("NewHx711 error:", err)
-				return
-			}
-		/*
-			// SetGain default is 128
-			// Gain of 128 or 64 is input channel A, gain of 32 is input channel B
-			// hx711.SetGain(128)
-
-			// make sure to use your values from calibration above
-			hx711.AdjustZero = 5507
-			hx711.AdjustScale = 30904
-			/*
-				//var data[5] float64
-				for i := 0; i < 5; i++ {
-
-					time.Sleep(200 * time.Microsecond)
-
-					data[i], err = hx711.ReadDataMedian(11)
-					if err != nil {
-						fmt.Println("ReadDataMedian error:", err)
-						continue
-					}
-					fmt.Println(data[i])
-
-				}
-				for i := 0; i < 5; i++ {
-					fmt.Println(int(data[i]))
-				}
-	*/
-
-	//Digi Scale
 	err := hx711.HostInit()
 	if err != nil {
 		fmt.Println("HostInit error:", err)
@@ -69,29 +30,67 @@ func main() {
 		return
 	}
 
-	defer hx711.Shutdown()
+	// SetGain default is 128
+	// Gain of 128 or 64 is input channel A, gain of 32 is input channel B
+	// hx711.SetGain(128)
 
-	err = hx711.Reset()
-	if err != nil {
-		fmt.Println("Reset error:", err)
-		return
-	}
+	// make sure to use your values from calibration above
 	hx711.AdjustZero = 5507
 	hx711.AdjustScale = 30904
-	var data [4]int
-	for i := 0; i < 4; i++ {
+
+	var data [5]float64
+	for i := 0; i < 5; i++ {
+
 		time.Sleep(200 * time.Microsecond)
 
-		data[i], err = hx711.ReadDataRaw()
+		data[i], err = hx711.ReadDataMedian(11)
 		if err != nil {
-			fmt.Println("ReadDataRaw error:", err)
+			fmt.Println("ReadDataMedian error:", err)
 			continue
 		}
-
 		fmt.Println(data[i])
+
+	}
+	for i := 0; i < 5; i++ {
+		fmt.Println(int(data[i]))
 	}
 
-	/*******************************************************************/
+	/*
+			//Digi Scale
+			err := hx711.HostInit()
+			if err != nil {
+				fmt.Println("HostInit error:", err)
+				return
+			}
+
+			hx711, err := hx711.NewHx711("GPIO6", "GPIO5")
+			if err != nil {
+				fmt.Println("NewHx711 error:", err)
+				return
+			}
+
+			defer hx711.Shutdown()
+
+			err = hx711.Reset()
+			if err != nil {
+				fmt.Println("Reset error:", err)
+				return
+			}
+
+			var data [4]int
+			for i := 0; i < 4; i++ {
+				time.Sleep(200 * time.Microsecond)
+
+				data[i], err = hx711.ReadDataRaw()
+				if err != nil {
+					fmt.Println("ReadDataRaw error:", err)
+					continue
+				}
+
+				fmt.Println(data[i])
+			}
+		/*
+			/*******************************************************************/
 	//SPI
 	// Make sure periph is initialized.
 
@@ -150,7 +149,8 @@ func main() {
 	/*******************************************************************/
 	//display on screen
 	//stringNumber := floattostr(data[4])
-	stringNumber := strconv.Itoa(int(data[3]))
+	stringNumber := strconv.FormatFloat(data[4], 'E', -1, 64)
+	//stringNumber := strconv.Itoa(int(data[3]))
 	runedNumbers := []rune(stringNumber)
 
 	for _, r := range runedNumbers {
