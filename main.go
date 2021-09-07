@@ -148,7 +148,7 @@ func main() {
 	/*******************************************************************/
 	//display on screen
 	//stringNumber := floattostr(data[4])
-	stringNumber := strconv.Itoa(data[3])
+	stringNumber := strconv.Itoa(int(data[3]))
 	runedNumbers := []rune(stringNumber)
 
 	for _, r := range runedNumbers {
