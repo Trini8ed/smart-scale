@@ -14,7 +14,7 @@ import (
 )
 
 func main() {
-	calibrate()
+	//calibrate()
 	//var data [5]float64
 	//getWeight(data)
 
@@ -35,8 +35,8 @@ func main() {
 	// hx711.SetGain(128)
 
 	// make sure to use your values from calibration above
-	hx711.AdjustZero = 1686
-	hx711.AdjustScale = 68.836634
+	hx711.AdjustZero = 4525
+	hx711.AdjustScale = 69.242574
 
 	var data [5]float64
 	for i := 0; i < 5; i++ {
