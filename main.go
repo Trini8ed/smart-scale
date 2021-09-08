@@ -14,7 +14,7 @@ import (
 )
 
 func main() {
-	calibrate()
+	//calibrate()
 	//var data [5]float64
 	//getWeight(data)
 
